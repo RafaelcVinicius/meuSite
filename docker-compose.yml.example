@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  app:
+    build:
+      context: ./
+    restart: unless-stopped
+    container_name: meuSiteFront
+    ports:
+      - 8080:9000
+    networks:
+      - network
+
+networks:
+  networks:
+    driver: bridge
