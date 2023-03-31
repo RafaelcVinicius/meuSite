@@ -30,5 +30,5 @@ yarn-error.log*
 
 
 # docker compose
-.docker-compose.yml
-.Dockerfile
+docker-compose.yml
+Dockerfile
