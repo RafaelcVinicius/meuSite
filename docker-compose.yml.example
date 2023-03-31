@@ -5,11 +5,20 @@ services:
       context: ./
     restart: unless-stopped
     container_name: meuSiteFront
-    ports:
-      - 8080:9000
+    expose:
+      - "80"
     networks:
       - network
 
+  nginx:
+    image: nginx:stable-alpine
+    networks:
+      - network
+    ports:
+      - "8080:80"
+    volumes:
+      - ./.docker-compose/proxy.conf:/etc/nginx/nginx.conf
+
 networks:
-  networks:
+  network:
     driver: bridge
