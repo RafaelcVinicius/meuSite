@@ -1,0 +1,290 @@
+// Quasar SCSS (& Sass) Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass/SCSS variables found in Quasar's source Sass/SCSS files.
+
+// Check documentation for full list of Quasar variables
+
+// Your own variables (that are declared here) and Quasar's own
+// ones will be available out of the box in your .vue/.scss/.sass files
+
+// It's highly recommended to change the default colors
+// to match your app's branding.
+// Tip: Use the "Theme Builder" on Quasar's documentation website.
+
+$primary: #4c84ec;
+$secondary: #68b2f8;
+$accent: #7037cd;
+
+$dark: #1d0c20;
+$dark-page: #121212;
+
+$positive: #21ba45;
+$negative: #c10015;
+$info: #31ccec;
+$warning: #f2c037;
+
+// .color1 { #68b2f8 };
+// .color2 { #506ee5 };
+// .color3 { #7037cd };
+// .color4 { #651f71 };
+// .color5 { #1d0c20 };
+
+.flex-js {
+  justify-content: flex-start;
+}
+.flex-je {
+  justify-content: flex-end;
+}
+.flex-jb {
+  justify-content: space-between;
+}
+.flex-ja {
+  justify-content: space-around;
+}
+.flex-jc {
+  justify-content: center;
+}
+
+.flex-c {
+  flex-direction: column;
+}
+
+.flex-as {
+  align-items: flex-start;
+}
+.flex-ae {
+  align-items: flex-end;
+}
+.flex-ac {
+  align-items: center;
+}
+
+.flex-di {
+  flex-direction: inherit;
+}
+
+.flex-js,
+.flex-je,
+.flex-jb,
+.flex-ja,
+.flex-jc,
+.flex-ae,
+.flex-as,
+.flex-ac,
+.flex-c,
+.flex-di,
+.flex {
+  display: flex;
+}
+
+.p-10px {
+  padding: 10px;
+}
+.p-1 {
+  padding: 1rem;
+}
+.p-2 {
+  padding: 2rem;
+}
+.p-3 {
+  padding: 3rem;
+}
+
+.m-1 {
+  margin: 1rem;
+}
+.m-2 {
+  margin: 2rem;
+}
+.m-3 {
+  margin: 3rem;
+}
+
+.m-1r {
+  margin-right: 1rem;
+}
+.m-2r {
+  margin-right: 2rem;
+}
+.m-3r {
+  margin-right: 3rem;
+}
+
+.m-1l {
+  margin-left: 1rem;
+}
+.m-2l {
+  margin-left: 2rem;
+}
+.m-3l {
+  margin-left: 3rem;
+}
+
+.m-1t {
+  margin-top: 1rem;
+}
+.m-2t {
+  margin-top: 2rem;
+}
+.m-3t {
+  margin-top: 3rem;
+}
+.m-5t {
+  margin-top: 5rem;
+}
+
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+.h-40px {
+  height: 40px;
+}
+.h-300px {
+  height: 300px;
+}
+.h-400px {
+  height: 400px;
+}
+
+.mw-1366 {
+  max-width: 1366px;
+}
+
+.mw-50 {
+  max-width: 50px;
+}
+.mw-300 {
+  max-width: 300px;
+}
+.mw-500 {
+  max-width: 500px;
+}
+.mh-600 {
+  max-width: 600px;
+}
+
+.mh-100-75 {
+  max-width: calc(100vh - 75px);
+}
+
+.gap-c1 {
+  column-gap: 1rem;
+}
+.gap-c1-5 {
+  column-gap: 1.5rem;
+}
+.gap-c2 {
+  column-gap: 2rem;
+}
+
+.gap-r1 {
+  row-gap: 1rem;
+}
+.gap-r1-5 {
+  row-gap: 1.5rem;
+}
+.gap-r2 {
+  row-gap: 2rem;
+}
+
+.br-8 {
+  border-radius: 8px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.font-10 {
+  font-size: 10px;
+}
+.font-11 {
+  font-size: 11px;
+}
+.font-12 {
+  font-size: 12px;
+}
+.font-13 {
+  font-size: 13px;
+}
+.font-14 {
+  font-size: 14px;
+}
+.font-15 {
+  font-size: 15px;
+}
+.font-16 {
+  font-size: 16px;
+}
+.font-17 {
+  font-size: 17px;
+}
+.font-18 {
+  font-size: 18px;
+}
+.font-19 {
+  font-size: 19px;
+}
+.font-20 {
+  font-size: 20px;
+}
+.font-21 {
+  font-size: 21px;
+}
+.font-22 {
+  font-size: 22px;
+}
+.font-23 {
+  font-size: 23px;
+}
+.font-24 {
+  font-size: 24px;
+}
+.font-25 {
+  font-size: 25px;
+}
+.font-27 {
+  font-size: 27px;
+}
+.font-28 {
+  font-size: 28px;
+}
+.font-30 {
+  font-size: 30px;
+}
+.font-32 {
+  font-size: 32px;
+}
+.font-40 {
+  font-size: 40px;
+}
+.font-50 {
+  font-size: 50px;
+}
+.font-60 {
+  font-size: 60px;
+}
+
+.font-60 {
+  font-weight: bold;
+}
+.font-w600 {
+  font-weight: 600;
+}
+.font-w700 {
+  font-weight: 700;
+}

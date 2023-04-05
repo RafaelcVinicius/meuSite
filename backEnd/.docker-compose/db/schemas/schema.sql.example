@@ -1,0 +1,11 @@
+CREATE USER 'manager'@'%' IDENTIFIED BY '123456';
+
+GRANT ALL PRIVILEGES ON *.* TO 'manager'@'%' WITH GRANT OPTION;
+GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE ON app.* TO 'mspb'@'%';
+
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+
+FLUSH PRIVILEGES;
+
+-- Copiando estrutura do banco de dados para meusg
+CREATE DATABASE IF NOT EXISTS `app` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
