@@ -15,7 +15,7 @@ class CustomRequest {
             $body,
             $response;
     public function __construct() {
-        $this->contentType = 'application/json';
+        $this->contentType = 'application/x-www-form-urlencoded';
     }
 
     public function setRoute($route) {

@@ -1,0 +1,62 @@
+version: "3.7"
+
+services:
+  # Image project
+  app:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: meuSiteBack
+    image: app-laravel
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www/
+    extra_hosts:
+      - auth.rafaelcoldebella.com.br:172.17.0.1
+    networks:
+      - network
+  # Nginx
+  nginx:
+    depends_on:
+      - app
+    container_name: meuSiteNginx
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "86:80"
+      - "446:443"
+    volumes:
+      - ./:/var/www/
+      - ./.docker-compose/nginx/:/etc/nginx/conf.d/
+    networks:
+      - network
+
+  # MariaDB
+  db:
+    image: mariadb:10.3
+    container_name: meuSiteDB
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql/
+      - ./.docker-compose/db/mysql/mysql.cnf:/etc/mysql/
+      - ./.docker-compose/db/schemas/schemas.sql:/docker-entrypoint-initdb.d/
+    ports:
+      - "3309:3306"
+    networks:
+      - network
+
+networks:
+  network:
+      driver: bridge
+
+volumes:
+  database:
+    driver: local

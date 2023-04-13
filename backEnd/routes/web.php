@@ -28,19 +28,20 @@ Route::get('/app', function (Request $request) {
     // Socialite::driver('keycloak')->user();
     // dd($request->input("code"));
 
-    $curl = new  CustomRequest();
-    $curl->setRoute("https://auth.rafaelcoldebella.com.br/realms" ."/". config('services.keycloak.realms') . "/protocol/openid-connect/token");
-    $curl->setHeaders([
-        'Host'          =>  'api.rafaelcoldebella.com.br',
-        'User-Agent'    =>  'null',
-        'Accept'        =>  '*/*',
-    ]);
-    $curl->setBody([
-        "code=".$request->input("code")."&grant_type=authorization_code&client_id="
-        .config('services.keycloak.client_id')."&client_secret="
-        .config('services.keycloak.client_secret')."&redirect_uri="
-        .config('services.keycloak.base_url')
-    ]);
-    $curl->post();
-    dd($curl);
+    // $curl = new  CustomRequest();
+    // $curl->setRoute("https://auth.rafaelcoldebella.com.br/realms" ."/". config('services.keycloak.realms') . "/protocol/openid-connect/token");
+    // $curl->setHeaders([
+    //     'Host'          =>  'api.rafaelcoldebella.com.br',
+    //     'User-Agent'    =>  'null',
+    //     'Accept'        =>  '*/*',
+    //     'Content-Type'  =>  'application/x-www-form-urlencoded'
+    // ]);
+    // // $curl->setBody([
+    // //     "code=".$request->input("code")."&grant_type=authorization_code&client_id="
+    // //     .config('services.keycloak.client_id')."&client_secret="
+    // //     .config('services.keycloak.client_secret')."&redirect_uri="
+    // //     .config('services.keycloak.redirect')
+    // // ]);
+    // $curl->post();
+    // dd($curl);
 });
