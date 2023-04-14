@@ -77,6 +77,10 @@ nav a {
   letter-spacing: 2px;
   cursor: pointer;
 }
+.light-div{
+  background-color: rgb(241, 241, 241);
+  border: 1px solid #e7e7e7;
+}
 .div-content {
   display: flex;
   justify-content: center;
@@ -84,8 +88,6 @@ nav a {
   max-width: 550px;
   width: 100%;
   height: 150px;
-  background-color: rgb(241, 241, 241);
-  border: 1px solid #e7e7e7;
   font-size: 35px;
 }
 

@@ -1,26 +1,37 @@
 <template>
-  <div id="cpf">
-    <div class="div-titulo">
-      <h4 class="titulo">Gerador de CPF</h4>
-    </div>
-    <div class="div-acoes">
-      <div
-        class="btn-check"
-        @keyup="ativarFormatacao = !ativarFormatacao"
-        @click="ativarFormatacao = !ativarFormatacao"
-        :class="{ ativo: ativarFormatacao }"
-      >
-        <span></span>
-      </div>
-      <button class="div-btn" @click="gerarCPF">Gerar</button>
-    </div>
-    <div class="div-content">
-      <span>{{ filter }}</span>
-    </div>
-  </div>
+  <q-layout>
+    <q-page-container>
+      <q-page class="q-pa-md text-grey-8 q-py-xs" style="max-width: 550px">
+        <q-toolbar-title shrink class="text-weight-bold">
+          Gerador de CPF
+        </q-toolbar-title>
+        <q-item >
+          <q-item-section>
+            <q-toggle
+              v-model="ativarFormatacao"
+              checked-icon="check"
+              color="secondary"
+              unchecked-icon="clear"
+            />
+            <!-- <q-tooltip>Formata CPF</q-tooltip> -->
+          </q-item-section>
+          <q-item-section>
+            <q-btn push no-caps no-wrap class="q-ml-sm" @click="gerarCPF" color="secondary" label="Gerar CPF" />
+          </q-item-section>
+        </q-item>
+        <q-card flat bordered class="flex-ac flex-jc" style="max-width: 550px; height: 100px;">
+          <q-card-section>
+            <div class="text-h6">{{ filter }}</div>
+          </q-card-section>
+        </q-card>
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script>
+import { Dark } from 'quasar';
+
 export default {
   name: "GeradorCpf",
   data() {

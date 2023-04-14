@@ -1,105 +1,5 @@
-<!-- <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title> Rafael Coldebella </q-toolbar-title>
-
-        <div>Site v0.01</div>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item-label header> Essential Links </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
-</template>
-
-<script>
-import { defineComponent, ref } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
-
-const linksList = [
-  {
-    title: "Github",
-    caption: "github.com/RafaelcVinicius",
-    icon: "code",
-    link: "https://github.com/RafaelcVinicius",
-  },
-  {
-    title: "Gerador CPF",
-    caption: window.location.protocol + "//" + window.location.host + "/gerador-cpf",
-    icon: "chat",
-    link: window.location.protocol + "//" + window.location.host + "/gerador-cpf",
-  },
-  // {
-  //   title: 'Forum',
-  //   caption: 'forum.quasar.dev',
-  //   icon: 'record_voice_over',
-  //   link: 'https://forum.quasar.dev'
-  // },
-  // {
-  //   title: 'Twitter',
-  //   caption: '@quasarframework',
-  //   icon: 'rss_feed',
-  //   link: 'https://twitter.quasar.dev'
-  // },
-  // {
-  //   title: 'Facebook',
-  //   caption: '@QuasarFramework',
-  //   icon: 'public',
-  //   link: 'https://facebook.quasar.dev'
-  // },
-  // {
-  //   title: 'Quasar Awesome',
-  //   caption: 'Community Quasar projects',
-  //   icon: 'favorite',
-  //   link: 'https://awesome.quasar.dev'
-  // }
-];
-
-export default defineComponent({
-  name: "MainLayout",
-
-  components: {
-    EssentialLink,
-  },
-
-  setup() {
-    const leftDrawerOpen = ref(false);
-
-    return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
-    };
-  },
-});
-</script> -->
 <template>
-  <q-layout view="hHh lpR fFf" >
+  <q-layout >
     <q-header elevated class="text-grey-8 q-py-xs" height-hint="58">
       <q-toolbar>
         <q-btn
@@ -134,7 +34,7 @@ export default defineComponent({
             </q-avatar>
             <q-tooltip>{{ $q.dark.isActive ? "Modo light" : "Modo dark"}}</q-tooltip>
           </q-btn>
-          <q-btn round dense flat color="grey-8" icon="notifications">
+          <!-- <q-btn round dense flat color="grey-8" icon="notifications">
             <q-badge v-if="false" color="red" text-color="white" floating>
               5
             </q-badge>
@@ -145,7 +45,7 @@ export default defineComponent({
               <img src="https://cdn.quasar.dev/img/boy-avatar.png">
             </q-avatar>
             <q-tooltip>Account</q-tooltip>
-          </q-btn>
+          </q-btn> -->
         </div>
       </q-toolbar>
     </q-header>
@@ -158,7 +58,7 @@ export default defineComponent({
     >
       <q-scroll-area class="fit">
         <q-list padding>
-          <q-item v-for="link in links1" :key="link.text" v-ripple clickable>
+          <q-item v-for="link in links1" :key="link.text" :href="link.link" v-ripple clickable>
             <q-item-section avatar>
               <q-icon color="grey" :name="link.icon" />
             </q-item-section>
@@ -262,27 +162,16 @@ export default {
       toggleLeftDrawer,
       toggleDark,
       links1: [
-        { icon: 'home', text: 'Home' },
-        { icon: 'whatshot', text: 'Trending' },
-        { icon: 'subscriptions', text: 'Subscriptions' }
-      ],
-      links2: [
-        { icon: 'folder', text: 'Library' },
-        { icon: 'restore', text: 'History' },
-        { icon: 'watch_later', text: 'Watch later' },
-        { icon: 'thumb_up_alt', text: 'Liked videos' }
-      ],
-      links3: [
-        { icon: fabYoutube, text: 'YouTube Premium' },
-        { icon: 'local_movies', text: 'Movies & Shows' },
-        { icon: 'videogame_asset', text: 'Gaming' },
-        { icon: 'live_tv', text: 'Live' }
-      ],
-      links4: [
-        { icon: 'settings', text: 'Settings' },
-        { icon: 'flag', text: 'Report history' },
-        { icon: 'help', text: 'Help' },
-        { icon: 'feedback', text: 'Send feedback' }
+      {
+          icon: 'code',
+          text: 'GitHub',
+          link: 'https://github.com/RafaelcVinicius'
+        },
+        {
+          icon: 'link',
+          text: 'Gerador de CPF',
+          link: window.location.protocol + "//" + window.location.host + "/gerador-cpf"
+        },
       ],
       buttons1: [
         { text: 'About' },
