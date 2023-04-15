@@ -23,15 +23,7 @@ export default {
   border: 0;
   padding: 0;
 }
-body {
-  font-family: "Poppins", sans-serif;
-  text-align: center;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  letter-spacing: 1px;
-  color: #000408;
-  background-color: #fff;
-}
+
 a {
   color: #e7e7e7;
   text-decoration: none;

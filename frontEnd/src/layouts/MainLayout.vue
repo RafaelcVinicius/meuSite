@@ -11,7 +11,7 @@
           icon="menu"
         />
 
-        <q-btn flat no-caps no-wrap class="q-ml-xs" >
+        <q-btn flat no-caps no-wrap class="q-ml-xs"  to="/">
           <!-- <q-icon :name="fabYoutube" color="red" size="28px" /> -->
           <q-toolbar-title shrink class="text-weight-bold">
             Rafael Coldebella
@@ -34,6 +34,7 @@
             </q-avatar>
             <q-tooltip>{{ $q.dark.isActive ? "Modo light" : "Modo dark"}}</q-tooltip>
           </q-btn>
+
           <!-- <q-btn round dense flat color="grey-8" icon="notifications">
             <q-badge v-if="false" color="red" text-color="white" floating>
               5
@@ -58,7 +59,7 @@
     >
       <q-scroll-area class="fit">
         <q-list padding>
-          <q-item v-for="link in links1" :key="link.text" :href="link.link" v-ripple clickable>
+          <q-item v-for="link in links1" :key="link.text" :target="link.target ? '_blank' : '_self'" :href="link.link" v-ripple clickable>
             <q-item-section avatar>
               <q-icon color="grey" :name="link.icon" />
             </q-item-section>
@@ -68,8 +69,25 @@
           </q-item>
 
           <q-separator class="q-my-md" />
+          <q-item-label header class="text-weight-bold text-uppercase">
+            Aplicativos
+          </q-item-label>
 
-          <!-- <q-item v-for="link in links2" :key="link.text" v-ripple clickable>
+          <q-item v-for="link in links2" :key="link.text" :target="link.target ? '_blank' : '_self'" :href="link.link" v-ripple clickable>
+            <q-item-section avatar>
+              <q-icon color="grey" :name="link.icon" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ link.text }}</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-separator class="q-mt-md q-mb-xs" />
+          <q-item-label header class="text-weight-bold text-uppercase">
+            Em Breve
+          </q-item-label>
+
+          <q-item v-for="link in links3" disable="disable" :key="link.text" v-ripple clickable>
             <q-item-section avatar>
               <q-icon color="grey" :name="link.icon" />
             </q-item-section>
@@ -80,56 +98,6 @@
 
           <q-separator class="q-mt-md q-mb-xs" />
 
-          <q-item-label header class="text-weight-bold text-uppercase">
-            More from Youtube
-          </q-item-label>
-
-          <q-item v-for="link in links3" :key="link.text" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon color="grey" :name="link.icon" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-separator class="q-my-md" />
-
-          <q-item v-for="link in links4" :key="link.text" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon color="grey" :name="link.icon" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item> -->
-
-          <!-- <q-separator class="q-mt-md q-mb-lg" />
-
-          <div class="q-px-md text-grey-9">
-            <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-              <a
-                v-for="button in buttons1"
-                :key="button.text"
-                class="YL__drawer-footer-link"
-                href="javascript:void(0)"
-              >
-                {{ button.text }}
-              </a>
-            </div>
-          </div> -->
-          <!-- <div class="q-py-md q-px-md text-grey-9">
-            <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-              <a
-                v-for="button in buttons2"
-                :key="button.text"
-                class="YL__drawer-footer-link"
-                href="javascript:void(0)"
-              >
-                {{ button.text }}
-              </a>
-            </div>
-          </div> -->
         </q-list>
       </q-scroll-area>
     </q-drawer>
@@ -142,7 +110,6 @@
 
 <script>
 import { ref } from 'vue'
-import { fabYoutube } from '@quasar/extras/fontawesome-v6'
 import { useQuasar } from 'quasar'
 export default {
   name: 'MyLayout',
@@ -152,25 +119,53 @@ export default {
     const $q = useQuasar()
     function toggleLeftDrawer () {
       leftDrawerOpen.value = !leftDrawerOpen.value
+    };
+
+    if($q.dark.isActive || localStorage.dark == 'true'){
+      $q.dark.set(true)
     }
+
     function toggleDark () {
       $q.dark.toggle()
-    }
+      localStorage.dark = $q.dark.isActive;
+    };
+
     return {
       leftDrawerOpen,
       search,
       toggleLeftDrawer,
       toggleDark,
       links1: [
-      {
+        { icon: 'home',
+          text: 'Início',
+          link: window.location.protocol + "//" + window.location.host,
+        },
+        {
           icon: 'code',
           text: 'GitHub',
-          link: 'https://github.com/RafaelcVinicius'
+          link: 'https://github.com/RafaelcVinicius',
+          target: true
         },
+      ],
+      links2: [
         {
           icon: 'link',
           text: 'Gerador de CPF',
           link: window.location.protocol + "//" + window.location.host + "/gerador-cpf"
+        },
+      ],
+      links3: [
+      {
+          icon: 'code',
+          text: 'Gerador de CNPJ',
+        },
+        {
+          icon: 'link',
+          text: 'Validador de CNPJ',
+        },
+        {
+          icon: 'link',
+          text: 'Validador de CPF',
         },
       ],
       buttons1: [

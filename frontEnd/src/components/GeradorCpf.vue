@@ -12,17 +12,25 @@
               checked-icon="check"
               color="secondary"
               unchecked-icon="clear"
-            />
-            <!-- <q-tooltip>Formata CPF</q-tooltip> -->
+            >
+            {{ ativarFormatacao ? "CPF formatado" : "CPF não formatado" }}
+          </q-toggle>
           </q-item-section>
           <q-item-section>
             <q-btn push no-caps no-wrap class="q-ml-sm" @click="gerarCPF" color="secondary" label="Gerar CPF" />
+            <q-tooltip>Gerar CPF</q-tooltip>
           </q-item-section>
         </q-item>
-        <q-card flat bordered class="flex-ac flex-jc" style="max-width: 550px; height: 100px;">
+        <q-card flat bordered class="relative-position flex-ac flex-jc" style="max-width: 550px; height: 100px;">
           <q-card-section>
             <div class="text-h6">{{ filter }}</div>
           </q-card-section>
+          <q-btn flat round class="copy_text"  @click="copyToboard(filter), triggerPositive" >
+            <q-icon size="18px">
+              <svg viewBox="0 0 24 24"><path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg>
+            </q-icon>
+            <q-tooltip>Copiar CPF</q-tooltip>
+          </q-btn>
         </q-card>
       </q-page>
     </q-page-container>
@@ -30,8 +38,8 @@
 </template>
 
 <script>
-import { Dark } from 'quasar';
-
+import { Notify } from 'quasar'
+import { copyToClipboard } from 'quasar'
 export default {
   name: "GeradorCpf",
   data() {
@@ -127,6 +135,19 @@ export default {
       }
       return ret;
     },
+    copyToboard(filter) {
+      copyToClipboard(filter)
+      .then(() => {
+        Notify.create(
+        {
+          type: 'positive',
+          message: 'CPF copiado com sucesso!'
+        })
+      })
+      .catch(() => {
+        // fail
+      });
+    },
   },
 };
 </script>
@@ -169,5 +190,10 @@ export default {
   background-color: rgb(255, 255, 255);
   box-shadow: 1px 3px 6px rgb(133, 132, 132);
   border-radius: 100%;
+}
+.copy_text{
+  position: absolute;
+  top: 2px;
+  right: 3px;
 }
 </style>
