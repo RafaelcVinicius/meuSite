@@ -35,18 +35,27 @@
             <q-tooltip>{{ $q.dark.isActive ? "Modo light" : "Modo dark"}}</q-tooltip>
           </q-btn>
 
-          <!-- <q-btn round dense flat color="grey-8" icon="notifications">
-            <q-badge v-if="false" color="red" text-color="white" floating>
-              5
-            </q-badge>
-            <q-tooltip>Notifications</q-tooltip>
-          </q-btn>
-          <q-btn round flat>
-            <q-avatar size="26px">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-            </q-avatar>
-            <q-tooltip>Account</q-tooltip>
-          </q-btn> -->
+          <template v-if="getCheckAuth">
+            <q-btn round dense flat color="grey-8" icon="notifications">
+              <q-badge v-if="false" color="red" text-color="white" floating>
+                5
+              </q-badge>
+              <q-tooltip>Notifications</q-tooltip>
+            </q-btn>
+            <q-btn round flat>
+              <q-avatar size="26px">
+                <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+              </q-avatar>
+              <q-tooltip>Account</q-tooltip>
+            </q-btn>
+          </template>
+          <template v-else>
+            <q-btn flat no-caps class="q-ml-ml" href="https://auth.rafaelcoldebella.com.br/realms/meusite/protocol/openid-connect/auth?client_id=meusite&redirect_uri=http%3A%2F%2Flocalhost%3A9000&scope=openid&response_type=code&state=ib8KhfVApItbjZ6prwrBImd5x2ztmJNurELldZGs">
+              <q-item-label>
+               Fazer login
+              </q-item-label>
+            </q-btn>
+          </template>
         </div>
       </q-toolbar>
     </q-header>
@@ -111,11 +120,13 @@
 <script>
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
+import { storeMain } from "../stores/storeMain.js";
+import { mapActions, mapGetters } from "pinia";
+
 export default {
   name: 'MyLayout',
   setup () {
     const leftDrawerOpen = ref(false)
-    const search = ref('')
     const $q = useQuasar()
     function toggleLeftDrawer () {
       leftDrawerOpen.value = !leftDrawerOpen.value
@@ -132,7 +143,6 @@ export default {
 
     return {
       leftDrawerOpen,
-      search,
       toggleLeftDrawer,
       toggleDark,
       links1: [
@@ -184,6 +194,18 @@ export default {
         { text: 'Test new features' }
       ]
     }
+  },
+
+  methods:{
+    ...mapActions(storeMain, ['checkAuth']),
+    ...mapActions(storeMain, ['getUrlLogin']),
+  },
+
+  computed:{
+    ...mapGetters(storeMain, ['getCheckAuth']),
+    // getCheckAuth(){
+    //   return this.storeMain.getCheckAuth;
+    // }
   }
 }
 </script>

@@ -33,8 +33,8 @@ return [
 
     'keycloak' => [
         'client_id' => env('KEYCLOAK_CLIENT_ID', "meusite"),
-        'client_secret' => env('KEYCLOAK_CLIENT_SECRET', "PBQH6ZVe0KYhCMWevzZRHOtgE5hSYo8W"),
-        'redirect' => env('KEYCLOAK_REDIRECT_URI', "https://api.rafaelcoldebella.com.br/app"),
+        'client_secret' => env('KEYCLOAK_CLIENT_SECRET', "EhSPMmdNKoSEW97d6V5DxqwrTnqXz1kY"),
+        'redirect' => env('KEYCLOAK_REDIRECT_URI', "http://localhost:9000"),
         'base_url' => env('KEYCLOAK_BASE_URL', "https://auth.rafaelcoldebella.com.br"),   // Specify your keycloak server URL here
         'realms' => env('KEYCLOAK_REALM', "meusite")         // Specify your keycloak realm
     ],
