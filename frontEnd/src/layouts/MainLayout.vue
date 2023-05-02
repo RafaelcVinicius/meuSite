@@ -50,7 +50,7 @@
             </q-btn>
           </template>
           <template v-else>
-            <q-btn flat no-caps class="q-ml-ml" href="https://auth.rafaelcoldebella.com.br/realms/meusite/protocol/openid-connect/auth?client_id=meusite&redirect_uri=http%3A%2F%2Flocalhost%3A9000&scope=openid&response_type=code&state=ib8KhfVApItbjZ6prwrBImd5x2ztmJNurELldZGs">
+            <q-btn flat no-caps class="q-ml-ml" @click="login">
               <q-item-label>
                Fazer login
               </q-item-label>
@@ -122,6 +122,8 @@ import { ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { storeMain } from "../stores/storeMain.js";
 import { mapActions, mapGetters } from "pinia";
+import { keycloak } from "boot/keycloak.js";
+
 
 export default {
   name: 'MyLayout',
@@ -199,6 +201,28 @@ export default {
   methods:{
     ...mapActions(storeMain, ['checkAuth']),
     ...mapActions(storeMain, ['getUrlLogin']),
+    login(){
+      keycloak
+      .init({
+        onLoad: "login-required",
+        checkLoginIframe: false,
+        enableLogging: true
+      })
+      .then(async (authenticated) => {
+        if (authenticated) {
+          console.log("Authenticated");
+          console.log(authenticated);
+          // await createRefreshTokenTimer(keycloak);
+          // resolve()
+        } else {
+          console.log("Not authenticated");
+          // window.location.reload()
+        }
+      }).catch((error) => {
+      console.log("Authentication failure", error)
+      // window.location.reload()
+      })
+    },
   },
 
   computed:{
