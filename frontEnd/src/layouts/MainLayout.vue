@@ -209,6 +209,8 @@ export default {
         enableLogging: true
       })
       .then(async (authenticated) => {
+          console.log(keycloak.token);
+
         if (authenticated) {
           console.log("Authenticated");
           console.log(authenticated);
@@ -221,8 +223,9 @@ export default {
       }).catch((error) => {
       console.log("Authentication failure", error)
       // window.location.reload()
-      })
+    });
     },
+
   },
 
   computed:{
