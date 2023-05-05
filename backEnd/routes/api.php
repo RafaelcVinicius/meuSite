@@ -23,3 +23,9 @@ Route::get('/login', function () {
     dd(Socialite::driver('keycloak'));
     return Socialite::driver('keycloak')->redirect();
 });
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/app', function (Request $request) {
+       dd(Auth::token());
+    });
+});

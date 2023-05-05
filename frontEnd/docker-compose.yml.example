@@ -12,6 +12,7 @@ services:
 
   nginx:
     image: nginx:stable-alpine
+    restart: unless-stopped
     networks:
       - network
     ports:
