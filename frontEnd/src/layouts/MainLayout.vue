@@ -50,9 +50,19 @@
             </q-btn>
           </template>
           <template v-else>
-            <q-btn flat no-caps class="q-ml-ml" @click="login">
+            <q-btn flat no-caps class="q-ml-ml" @click="loginKeycloak">
               <q-item-label>
                Fazer login
+              </q-item-label>
+            </q-btn>
+            <q-btn flat no-caps class="q-ml-ml" @click="logoutKeycloak">
+              <q-item-label>
+                logout
+              </q-item-label>
+            </q-btn>
+            <q-btn flat no-caps class="q-ml-ml" @click="getTeste">
+              <q-item-label>
+               get teste
               </q-item-label>
             </q-btn>
           </template>
@@ -118,12 +128,10 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { useQuasar } from 'quasar'
+import { ref } from 'vue';
+import { useQuasar } from 'quasar';
 import { storeMain } from "../stores/storeMain.js";
-import { mapActions, mapGetters } from "pinia";
-import { keycloak } from "boot/keycloak.js";
-
+import { mapActions } from "pinia";
 
 export default {
   name: 'MyLayout',
@@ -199,40 +207,16 @@ export default {
   },
 
   methods:{
-    ...mapActions(storeMain, ['checkAuth']),
-    ...mapActions(storeMain, ['getUrlLogin']),
-    login(){
-      keycloak
-      .init({
-        onLoad: "login-required",
-        checkLoginIframe: false,
-        enableLogging: true
-      })
-      .then(async (authenticated) => {
-          console.log(keycloak.token);
-
-        if (authenticated) {
-          console.log("Authenticated");
-          console.log(authenticated);
-          // await createRefreshTokenTimer(keycloak);
-          // resolve()
-        } else {
-          console.log("Not authenticated");
-          // window.location.reload()
-        }
-      }).catch((error) => {
-      console.log("Authentication failure", error)
-      // window.location.reload()
-    });
-    },
-
+    // ...mapActions(storeMain, ['checkAuth']),
+    ...mapActions(storeMain, ['loginKeycloak']),
+    ...mapActions(storeMain, ['getTeste']),
+    ...mapActions(storeMain, ['logoutKeycloak']),
   },
 
   computed:{
-    ...mapGetters(storeMain, ['getCheckAuth']),
-    // getCheckAuth(){
-    //   return this.storeMain.getCheckAuth;
-    // }
+    getCheckAuth(){
+      return false;
+    }
   }
 }
 </script>

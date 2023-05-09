@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { api } from "boot/axios";
+import { keycloak } from "boot/keycloak.js";
 
 export const storeMain = defineStore('storeMain', {
   state: () => ({
@@ -7,7 +8,8 @@ export const storeMain = defineStore('storeMain', {
       email:"",
       name:"",
       token:"",
-    }
+    },
+    keycloak: {},
   }),
 
   getters: {
@@ -17,21 +19,40 @@ export const storeMain = defineStore('storeMain', {
   },
 
   actions: {
-    checkAuth () {
-      let cookie = document.cookie.split("; "),
-          index = cookie.findIndex((e) => e.includes("token="));
-        console.log(index);
-
-      if(index >= 0){
-        console.log(index);
-        return true;
-      }
-      return false;
+    loginKeycloak(){
+      keycloak.init({
+        onLoad: "login-required",
+        checkLoginIframe: false,
+        enableLogging: true
+      })
+      .then(async (authenticated) => {
+        if (authenticated) {
+            document.cookie = 'refreshToken=' + keycloak.refreshToken;
+            await createRefreshTokenTimer(keycloak);
+            resolve()
+        } else {
+            console.log("Not authenticated");
+            window.location.reload()
+        }
+      }).catch((error) => {
+        console.log("Authentication failure", error)
+        window.location.reload()
+      });
     },
 
-    getUrlLogin(){
-      api
-      .get("/login")
+    logoutKeycloak(){
+      cookieStore.delete('refreshToken');
+      location.href = '/';
+
+      keycloak.logout();
+    },
+
+    getTeste(){
+      api.get("/app", {
+        headers: {
+          Authorization: 'Bearer ' +  keycloak.token,
+        }
+      })
       .then((res) => {
         console.log(res);
         // window.location.href = res.;
@@ -39,6 +60,6 @@ export const storeMain = defineStore('storeMain', {
       .catch((error) => {
         console.log("error", error.response.data.message);
       });
-    }
+    },
   }
 })
