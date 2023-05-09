@@ -34,7 +34,6 @@
             </q-avatar>
             <q-tooltip>{{ $q.dark.isActive ? "Modo light" : "Modo dark"}}</q-tooltip>
           </q-btn>
-
           <template v-if="getCheckAuth">
             <q-btn round dense flat color="grey-8" icon="notifications">
               <q-badge v-if="false" color="red" text-color="white" floating>
@@ -48,21 +47,16 @@
               </q-avatar>
               <q-tooltip>Account</q-tooltip>
             </q-btn>
+            <q-btn flat no-caps class="q-ml-ml" @click="logoutKeycloak">
+              <q-item-label>
+                Logout
+              </q-item-label>
+            </q-btn>
           </template>
           <template v-else>
             <q-btn flat no-caps class="q-ml-ml" @click="loginKeycloak">
               <q-item-label>
                Fazer login
-              </q-item-label>
-            </q-btn>
-            <q-btn flat no-caps class="q-ml-ml" @click="logoutKeycloak">
-              <q-item-label>
-                logout
-              </q-item-label>
-            </q-btn>
-            <q-btn flat no-caps class="q-ml-ml" @click="getTeste">
-              <q-item-label>
-               get teste
               </q-item-label>
             </q-btn>
           </template>
@@ -132,6 +126,7 @@ import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 import { storeMain } from "../stores/storeMain.js";
 import { mapActions } from "pinia";
+import { keycloak } from 'src/boot/keycloak';
 
 export default {
   name: 'MyLayout',
@@ -215,7 +210,7 @@ export default {
 
   computed:{
     getCheckAuth(){
-      return false;
+      return keycloak.authenticated;
     }
   }
 }

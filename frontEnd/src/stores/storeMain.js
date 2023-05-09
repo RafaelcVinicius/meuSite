@@ -9,7 +9,6 @@ export const storeMain = defineStore('storeMain', {
       name:"",
       token:"",
     },
-    keycloak: {},
   }),
 
   getters: {
