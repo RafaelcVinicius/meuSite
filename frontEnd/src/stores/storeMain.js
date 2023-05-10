@@ -7,7 +7,7 @@ export const storeMain = defineStore('storeMain', {
     user: {
       email:"",
       name:"",
-      token:"",
+      logo:"",
     },
   }),
 
@@ -46,15 +46,14 @@ export const storeMain = defineStore('storeMain', {
       keycloak.logout();
     },
 
-    getTeste(){
-      api.get("/app", {
+    getUser(){
+      api.get("/user", {
         headers: {
           Authorization: 'Bearer ' +  keycloak.token,
         }
       })
       .then((res) => {
         console.log(res);
-        // window.location.href = res.;
       })
       .catch((error) => {
         console.log("error", error.response.data.message);

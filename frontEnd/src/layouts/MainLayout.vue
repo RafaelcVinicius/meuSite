@@ -34,7 +34,7 @@
             </q-avatar>
             <q-tooltip>{{ $q.dark.isActive ? "Modo light" : "Modo dark"}}</q-tooltip>
           </q-btn>
-          <template v-if="getCheckAuth">
+          <template v-if="checkAuth">
             <q-btn round dense flat color="grey-8" icon="notifications">
               <q-badge v-if="false" color="red" text-color="white" floating>
                 5
@@ -202,17 +202,22 @@ export default {
   },
 
   methods:{
-    // ...mapActions(storeMain, ['checkAuth']),
     ...mapActions(storeMain, ['loginKeycloak']),
-    ...mapActions(storeMain, ['getTeste']),
     ...mapActions(storeMain, ['logoutKeycloak']),
+    ...mapActions(storeMain, ['getUser']),
   },
 
   computed:{
-    getCheckAuth(){
+    checkAuth(){
       return keycloak.authenticated;
     }
-  }
+  },
+
+  created(){
+    if(this.checkAuth){
+      this.getUser();
+    }
+  },
 }
 </script>
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\WalletController;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -16,20 +18,23 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::get('/login', function (Request $request) {
     return json_encode($request->header('Authorization'));
-    // dd($request->headers);
-    // dd(Socialite::driver('keycloak'));
-    // return Socialite::driver('keycloak')->redirect();
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::get('/app', function (Request $request) {
-    //    dd(Auth::token());
-    return 'ola';
+    Route::prefix('user')->group(function () {
+        Route::get('/', function () {
+            return "ddd";
+        });
+    });
+
+    Route::prefix('wallet')->group(function () {
+        Route::post('/', [WalletController::class, 'store']);
+        Route::get('/', [WalletController::class, 'showAll']);
+        Route::prefix('{id}')->group(function () {
+            Route::get('/', [WalletController::class, 'show']);
+        });
     });
 });
+
