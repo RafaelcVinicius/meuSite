@@ -15,7 +15,6 @@ class StockExchangeResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" =>         $this->id,
             "symbol" =>     $this->symbol,
         ];
     }

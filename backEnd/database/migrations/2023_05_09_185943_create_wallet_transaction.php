@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('wallet_transaction', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('wallet_id')->unsigned();
-            $table->decimal('entry_value');
-            $table->decimal('output_value', 15, 4);
+            $table->char('operation', 1)->default(1)->description("0 sell , 1 buy");
+            $table->integer('amount');
+            $table->decimal('unit_price', 15, 4);
             $table->timestamps();
 
             $table->foreign('wallet_id')->references('id')->on('wallet')

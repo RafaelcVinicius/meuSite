@@ -14,6 +14,10 @@ class CorporateBonds extends Model
     protected $table = 'corporate_bonds';
 
     protected $fillable = [
-        "id",
+        'description',
+        'payment_type',
+        'variavel_rate_type',
+        'variavel_rate',
+        'flat_rate',
     ];
 }

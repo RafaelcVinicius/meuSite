@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('corporate_bonds', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('wallet_id')->unsigned();
-            $table->string('bonds');
-            $table->integer('payment_type')->default(0)->description("0 Pós fixado, 1 Pré fixado");
-            $table->string('variavel _rate_type')->nullable();
-            $table->decimal('variable_rate')->nullable();
-            $table->decimal('flat_rate')->nullable();
+            $table->string('description');
+            $table->char('payment_type', 1)->default(1)->description("0 Pós fixado, 1 Pré fixado");
+            $table->string('variavel_rate_type')->nullable();
+            $table->decimal('variavel_rate', 15, 2)->nullable();
+            $table->decimal('flat_rate', 15, 2)->nullable();
 
             $table->foreign('wallet_id')->references('id')->on('wallet')
             ->constrained()

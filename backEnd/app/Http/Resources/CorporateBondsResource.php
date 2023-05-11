@@ -15,8 +15,7 @@ class CorporateBondsResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" =>                 $this->id,
-            "bonds" =>              $this->bonds,
+            "description" =>        $this->description,
             "payment_type" =>       $this->payment_type,
             "variavel_rate_type" => $this->variavel_rate_type,
             "variavel_rate" =>      $this->variavel_rate,

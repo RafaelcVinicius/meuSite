@@ -14,6 +14,6 @@ class StockExchange extends Model
     protected $table = 'stock_exchange';
 
     protected $fillable = [
-        "id",
+        'symbol',
     ];
 }

@@ -14,22 +14,29 @@ class Wallet extends Model
     protected $table = 'wallet';
 
     protected $fillable = [
-        "id",
+        'id',
+        'description',
+        'acquisition_at',
+        'origin_id',
     ];
 
-    public function CoinsWallet(){
+    public function coins(){
         return $this->hasOne(CoinsWallet::class, 'wallet_id', 'id');
     }
 
-    public function WalletTransaction(){
-        return $this->hasOne(WalletTransaction::class, 'wallet_id', 'id');
+    public function transaction(){
+        return $this->hasMany(WalletTransaction::class, 'wallet_id', 'id');
     }
 
-    public function StockExchange(){
+    public function stockExchange(){
         return $this->hasOne(StockExchange::class, 'wallet_id', 'id');
     }
 
-    public function CorporateBonds(){
+    public function corporateBonds(){
         return $this->hasOne(CorporateBonds::class, 'wallet_id', 'id');
+    }
+
+    public function user(){
+        return $this->hasOne(User::class, 'uuid', 'user_uuid');
     }
 }

@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public $timestamps = true;
+    protected $primaryKey = 'id';
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'uuid',
     ];
 
     /**
@@ -41,4 +46,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function wallet(){
+        return $this->hasMany(Wallet::class, 'user_uuid', 'uuid');
+    }
 }

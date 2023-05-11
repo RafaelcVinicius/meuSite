@@ -30,10 +30,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     });
 
     Route::prefix('wallet')->group(function () {
-        Route::post('/', [WalletController::class, 'store']);
-        Route::get('/', [WalletController::class, 'showAll']);
+        Route::post('/',    [WalletController::class, 'store']);
+        Route::get('/',     [WalletController::class, 'showAll']);
         Route::prefix('{id}')->group(function () {
             Route::get('/', [WalletController::class, 'show']);
+            Route::put('/', [WalletController::class, 'show']);
         });
     });
 });

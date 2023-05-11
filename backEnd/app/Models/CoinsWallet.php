@@ -14,6 +14,6 @@ class CoinsWallet extends Model
     protected $table = 'coins_wallet';
 
     protected $fillable = [
-        "id",
+        'symbol',
     ];
 }

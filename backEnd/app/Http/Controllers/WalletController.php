@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Wallet\StoreRequest;
 use App\Services\WalletService;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,9 @@ class WalletController extends Controller
         $this->walletService = $walletService;
     }
 
-    // public function store(Request $request){
-    //     return $this->walletService->store($request->all());
-    // }
+    public function store(StoreRequest $request){
+        return $this->walletService->store($request->validated());
+    }
 
     public function show(Request $request, $id){
         return $this->walletService->show($id);

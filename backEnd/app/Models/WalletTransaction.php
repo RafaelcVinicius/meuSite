@@ -14,6 +14,8 @@ class WalletTransaction extends Model
     protected $table = 'wallet_transaction';
 
     protected $fillable = [
-        "id",
+        'operation',
+        'amount',
+        'unit_price',
     ];
 }
