@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('wallet_id')->unsigned();
             $table->char('operation', 1)->default(1)->description("0 sell , 1 buy");
-            $table->integer('amount');
+            $table->decimal('amount', 15, 8);
             $table->decimal('unit_price', 15, 4);
+            $table->timestamp('acquisition_at');
             $table->timestamps();
 
             $table->foreign('wallet_id')->references('id')->on('wallet')

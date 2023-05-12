@@ -15,9 +15,9 @@ class CorporateBonds extends Model
 
     protected $fillable = [
         'description',
-        'payment_type',
         'variavel_rate_type',
         'variavel_rate',
         'flat_rate',
+        'reward_at',
     ];
 }

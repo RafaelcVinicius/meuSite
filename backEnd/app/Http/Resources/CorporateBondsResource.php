@@ -16,10 +16,10 @@ class CorporateBondsResource extends JsonResource
     {
         return [
             "description" =>        $this->description,
-            "payment_type" =>       $this->payment_type,
             "variavel_rate_type" => $this->variavel_rate_type,
             "variavel_rate" =>      $this->variavel_rate,
             "flat_rate" =>          $this->flat_rate,
+            "reward" =>             $this->reward_at,
         ];
     }
 }

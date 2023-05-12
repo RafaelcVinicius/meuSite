@@ -16,7 +16,6 @@ class Wallet extends Model
     protected $fillable = [
         'id',
         'description',
-        'acquisition_at',
         'origin_id',
     ];
 

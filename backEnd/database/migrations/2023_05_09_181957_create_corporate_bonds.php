@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('wallet_id')->unsigned();
             $table->string('description');
-            $table->char('payment_type', 1)->default(1)->description("0 Pós fixado, 1 Pré fixado");
             $table->string('variavel_rate_type')->nullable();
             $table->decimal('variavel_rate', 15, 2)->nullable();
             $table->decimal('flat_rate', 15, 2)->nullable();
+            $table->timestamp('reward_at');
 
             $table->foreign('wallet_id')->references('id')->on('wallet')
             ->constrained()

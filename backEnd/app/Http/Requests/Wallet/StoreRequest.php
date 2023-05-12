@@ -23,7 +23,6 @@ class StoreRequest extends FormRequest
     {
         return [
             'description' =>                        ['required', 'min:3', 'max:255', 'string'],
-            'acquisition' =>                        ['date'],
             'originId' =>                           ['int'],
 
             'stockExchange.symbol' =>               ['required_with:stockExchange','string'],
@@ -31,15 +30,17 @@ class StoreRequest extends FormRequest
             'coins.symbol' =>                       ['required_with:coins','string'],
 
             'corporateBonds.description' =>         ['required_with:corporateBonds','string'],
-            'corporateBonds.paymentType' =>         ['required_with:corporateBonds','max:1'],
-            'corporateBonds.variavelRateType' =>    ['exclude_unless:corporateBonds.paymentType,1','required','string'],
-            'corporateBonds.variavelRate' =>        ['exclude_unless:corporateBonds.paymentType,1','required','numeric'],
-            'corporateBonds.flatRate' =>            ['exclude_unless:corporateBonds.paymentType,0','required','numeric'],
+            'corporateBonds.variavelRateType' =>    ['string'],
+            'corporateBonds.variavelRate' =>        ['numeric'],
+            'corporateBonds.flatRate' =>            ['numeric'],
+            'corporateBonds.reward' =>              ['required_with:corporateBonds','date'],
 
             'transaction' =>                        ['array', 'required'],
             'transaction.*.operation' =>            ['required','max:1'],
-            'transaction.*.amount' =>               ['required','int'],
+            'transaction.*.amount' =>               ['required','numeric'],
             'transaction.*.unitPrice' =>            ['required','numeric'],
+            'transaction.*.acquisition' =>          ['date'],
+
         ];
     }
 }

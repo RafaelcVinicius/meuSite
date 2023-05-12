@@ -17,5 +17,6 @@ class WalletTransaction extends Model
         'operation',
         'amount',
         'unit_price',
+        'acquisition_at',
     ];
 }

@@ -42,7 +42,6 @@ class WalletService
         $newData = [
             'wallet' => [
                 'description' =>    $data['description'],
-                'acquisition_at' => $data['acquisition'],
                 'origin_id' =>      $data['originId'],
             ]
         ];
@@ -54,20 +53,18 @@ class WalletService
             $newData['coins'] = $data['coins'];
 
         if(array_key_exists('corporateBonds', $data)){
-            $newData['corporateBonds']['description'] =         $data['corporateBonds']['description'];
-            $newData['corporateBonds']['payment_type'] =        $data['corporateBonds']['paymentType'];
-            if($data['corporateBonds']['paymentType'] == 1){
-                $newData['corporateBonds']['variavel_rate_type'] =  $data['corporateBonds']['variavelRateType'];
-                $newData['corporateBonds']['variavel_rate'] =       $data['corporateBonds']['variavelRate'];
-            }else{
-                $newData['corporateBonds']['flat_rate'] =           $data['corporateBonds']['flatRate'];
-            }
+            $newData['corporateBonds']['description'] =             $data['corporateBonds']['description'];
+            $newData['corporateBonds']['reward_at'] =               $data['corporateBonds']['reward'];
+            $newData['corporateBonds']['variavel_rate_type'] =      $data['corporateBonds']['variavelRateType'] ?? null;
+            $newData['corporateBonds']['variavel_rate'] =           $data['corporateBonds']['variavelRate'] ?? null;
+            $newData['corporateBonds']['flat_rate'] =               $data['corporateBonds']['flatRate'] ?? null;
         }
 
         foreach($data['transaction'] as $key => $transaction){
-            $newData['transaction'][$key]['operation'] =  $transaction['operation'];
-            $newData['transaction'][$key]['amount'] =     $transaction['amount'];
-            $newData['transaction'][$key]['unit_price'] =  $transaction['unitPrice'];
+            $newData['transaction'][$key]['operation'] =        $transaction['operation'];
+            $newData['transaction'][$key]['amount'] =           $transaction['amount'];
+            $newData['transaction'][$key]['unit_price'] =       $transaction['unitPrice'];
+            $newData['transaction'][$key]['acquisition_at'] =   $transaction['acquisition'];
         }
 
         return  $newData;
