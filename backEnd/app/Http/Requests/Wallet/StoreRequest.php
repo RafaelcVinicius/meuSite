@@ -30,7 +30,7 @@ class StoreRequest extends FormRequest
             'coins.symbol' =>                       ['required_with:coins','string'],
 
             'corporateBonds.description' =>         ['required_with:corporateBonds','string'],
-            'corporateBonds.variavelRateType' =>    ['string'],
+            'corporateBonds.variavelRateType' =>    ['int'],
             'corporateBonds.variavelRate' =>        ['numeric'],
             'corporateBonds.flatRate' =>            ['numeric'],
             'corporateBonds.reward' =>              ['required_with:corporateBonds','date'],

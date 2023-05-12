@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('wallet_id')->unsigned();
             $table->string('description');
-            $table->string('variavel_rate_type')->nullable();
+            $table->integer('variavel_rate_type')->nullable();
             $table->decimal('variavel_rate', 15, 2)->nullable();
             $table->decimal('flat_rate', 15, 2)->nullable();
             $table->timestamp('reward_at');

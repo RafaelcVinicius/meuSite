@@ -28,15 +28,16 @@ class WalletService
         return new WalletResource($this->walletRepository->show($userId));
     }
 
-    public function showAll(): object
+    public function showAll(): array
     {
-        return WalletResource::collection($this->walletRepository->showAll());
+        return$this->walletRepository->showAll();
     }
 
     public function update(Request $request)
     {
 
     }
+
     private function prepareToStore(array $data): array
     {
         $newData = [

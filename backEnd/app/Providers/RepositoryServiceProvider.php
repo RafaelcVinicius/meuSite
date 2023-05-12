@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\BcbSgsRepository;
+use App\Repositories\Contracts\BcbSgsRepositoryInterface;
 use App\Repositories\Contracts\WalletRepositoryInterface;
 use App\Repositories\WalletRepository;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +30,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             WalletRepositoryInterface::class,
             WalletRepository::class
+        );
+
+        $this->app->bind(
+            BcbSgsRepositoryInterface::class,
+            BcbSgsRepository::class
         );
     }
 }
