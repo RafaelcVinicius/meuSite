@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
 import GeradorCpf from "components/GeradorCpf.vue";
 
 export default {

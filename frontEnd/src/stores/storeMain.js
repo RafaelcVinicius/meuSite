@@ -52,8 +52,7 @@ export const storeMain = defineStore('storeMain', {
           Authorization: 'Bearer ' +  keycloak.token,
         }
       })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
       })
       .catch((error) => {
         console.log("error", error.response.data.message);

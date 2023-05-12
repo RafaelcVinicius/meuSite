@@ -86,14 +86,16 @@
             Aplicativos
           </q-item-label>
 
-          <q-item v-for="link in links2" :key="link.text" :target="link.target ? '_blank' : '_self'" :href="link.link" v-ripple clickable>
-            <q-item-section avatar>
-              <q-icon color="grey" :name="link.icon" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ link.text }}</q-item-label>
-            </q-item-section>
-          </q-item>
+          <tamplate v-for="link in links2" :key="link.text">
+            <q-item v-if="link.auth == false || (link.auth == true && checkAuth)" :target="link.target ? '_blank' : '_self'" :href="link.link" v-ripple clickable>
+              <q-item-section avatar>
+                <q-icon color="grey" :name="link.icon" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>{{ link.text }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </tamplate>
 
           <q-separator class="q-mt-md q-mb-xs" />
           <q-item-label header class="text-weight-bold text-uppercase">
@@ -166,11 +168,18 @@ export default {
         {
           icon: 'link',
           text: 'Gerador de CPF',
-          link: window.location.protocol + "//" + window.location.host + "/gerador-cpf"
+          link: window.location.protocol + "//" + window.location.host + "/gerador-cpf",
+          auth: false,
+        },
+        {
+          icon: 'link',
+          text: 'Wallet dashboard',
+          link: window.location.protocol + "//" + window.location.host + "/wallet",
+          auth: true,
         },
       ],
       links3: [
-      {
+        {
           icon: 'code',
           text: 'Gerador de CNPJ',
         },
@@ -204,7 +213,7 @@ export default {
   methods:{
     ...mapActions(storeMain, ['loginKeycloak']),
     ...mapActions(storeMain, ['logoutKeycloak']),
-    ...mapActions(storeMain, ['getUser']),
+    // ...mapActions(storeMain, ['getUser']),
   },
 
   computed:{
@@ -215,7 +224,7 @@ export default {
 
   created(){
     if(this.checkAuth){
-      this.getUser();
+      // this.getUser();
     }
   },
 }

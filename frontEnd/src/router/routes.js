@@ -9,11 +9,15 @@ const routes = [
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/Gerador.vue") }],
   },
-
   {
     path: "/gerador-cnpj",
     component: () => import("layouts/MainLayout.vue"),
     children: [{ path: "", component: () => import("pages/Gerador.vue") }],
+  },
+  {
+    path: "/wallet",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/wallet/DashboardPage.vue") }],
   },
 
   // Always leave this as last one,
