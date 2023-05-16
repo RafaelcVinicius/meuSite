@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,9 +17,9 @@ class WalletTransactionResource extends JsonResource
     {
         return [
             "operation" =>      $this->operation,
-            "amount" =>         $this->amount,
-            "unitPrice" =>      $this->unit_price,
-            "acquisition" =>    $this->acquisition_at,
+            "amount" =>         (float)$this->amount,
+            "unitPrice" =>      (float)$this->unit_price,
+            "acquisition" =>    Carbon::parse($this->acquisition_at)->format('Y-m-d'),
             "currentValue" =>   $this->when(isset($this->currentValue), $this->currentValue, null),
         ];
     }
