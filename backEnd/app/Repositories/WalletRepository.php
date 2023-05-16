@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\WalletResource;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Repositories\Contracts\BcbSgsRepositoryInterface;
@@ -15,9 +16,9 @@ class WalletRepository implements WalletRepositoryInterface
     private User $user;
     protected BcbSgsRepository $bcbSgsRepository;
 
-    public function __construct(BcbSgsRepository $bcbSgsRepository)
+    public function __construct(BcbSgsRepositoryInterface $bcbSgsRepository)
     {
-        $this->user =  User::findOrFail(Auth::user()->id);
+        $this->user =  User::findOrFail(1);
         $this->bcbSgsRepository = $bcbSgsRepository;
     }
 
@@ -46,25 +47,20 @@ class WalletRepository implements WalletRepositoryInterface
 
     public function showAll()
     {
-        $dataWallet = [];
-        $dataWallet['currentValue'] =   0;
-        $dataWallet['investedAmount'] = 0;
-        $dataWallet['performance'] =    0;
-        $wallet =                       $this->user->wallet;
+        $wallet = $this->user->wallet;
 
         foreach($wallet as $w){
-            if(isset($w->corporateBonds)){
+            if(!empty($w['corporateBonds'])){
                 foreach ($w->transaction as $value){
-                    $dataWallet['investedAmount'] += $value->unit_price * $value->amount;
                     $reward =       new Carbon($w->corporateBonds->reward_at);
                     $acquisition =  new Carbon($value->acquisition_at);
-                    $format =       '&dataInicial={'. $acquisition->format('d/m/Y') .'}&'.'dataFinal={'. $reward->format('d/m/Y') .'}';
-                    $dataWallet['currentValue'] += $this->interestCalculation($this->bcbSgsRepository->showApiBcbSgs($w->corporateBonds->variavel_rate_type, $format), $value->unit_price * $value->amount, $w->corporateBonds->variavel_rate, $w->corporateBonds->flat_rate);
+                    $format =       '&dataInicial={'. $acquisition->add(1,'day')->format('d/m/Y') .'}&'.'dataFinal={'. $reward->format('d/m/Y') .'}';
+                    $value['currentValue'] = $this->interestCalculation($this->bcbSgsRepository->showApiBcbSgs($w->corporateBonds->variavel_rate_type, $format), $value->unit_price * $value->amount, $w->corporateBonds->variavel_rate, $w->corporateBonds->flat_rate);
                 }
             }
         }
-        $dataWallet['performance'] =  $dataWallet['currentValue'] - $dataWallet['investedAmount'];
-        return  $dataWallet;
+
+        return  $wallet;
     }
 
     public function update(string $walletId, Request $request): Wallet
@@ -80,6 +76,6 @@ class WalletRepository implements WalletRepositoryInterface
         foreach ($dataRate as $value) {
             $amountWithRate += $amountWithRate * (((($value->valor * $variavelRate)/100 + $flatRate )/100) );
         }
-        return $amountWithRate;
+        return round($amountWithRate, 2, PHP_ROUND_HALF_EVEN);
     }
 }

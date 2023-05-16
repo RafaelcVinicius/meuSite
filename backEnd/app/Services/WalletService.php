@@ -28,9 +28,9 @@ class WalletService
         return new WalletResource($this->walletRepository->show($userId));
     }
 
-    public function showAll(): array
+    public function showAll()
     {
-        return$this->walletRepository->showAll();
+        return WalletResource::collection($this->walletRepository->showAll());
     }
 
     public function update(Request $request)

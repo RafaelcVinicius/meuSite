@@ -19,6 +19,7 @@ class WalletTransactionResource extends JsonResource
             "amount" =>         $this->amount,
             "unitPrice" =>      $this->unit_price,
             "acquisition" =>    $this->acquisition_at,
+            "currentValue" =>   $this->when(isset($this->currentValue), $this->currentValue, null),
         ];
     }
 }

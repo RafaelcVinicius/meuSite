@@ -14,7 +14,6 @@ class WalletResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // dd($this->transaction);
         return [
             "id" =>                 $this->id,
             "userUuid" =>           $this->user_uuid,

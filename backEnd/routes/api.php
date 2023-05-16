@@ -22,7 +22,7 @@ Route::get('/login', function (Request $request) {
     return json_encode($request->header('Authorization'));
 });
 
-Route::group(['middleware' => 'auth:api'], function () {
+// Route::group(['middleware' => 'auth:api'], function () {
     Route::prefix('user')->group(function () {
         Route::get('/', function () {
             return "ddd";
@@ -37,5 +37,5 @@ Route::group(['middleware' => 'auth:api'], function () {
             Route::put('/', [WalletController::class, 'show']);
         });
     });
-});
+// });
 
