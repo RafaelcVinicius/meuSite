@@ -19,7 +19,12 @@
         </div>
       </div>
     </div>
-    <TablePopUp>
+    <q-btn flat no-caps class="q-ml-ml" to="/wallet/create">
+      <q-item-label>
+        Cadastrar
+      </q-item-label>
+    </q-btn>
+    <TablePopUp :wallet="getWallet">
     </TablePopUp>
 
 </template>

@@ -2,7 +2,7 @@
   <div class="q-pa-md w100">
     <q-table
       flat bordered
-      :rows="rows"
+      :rows="wallet"
       hide-header
       hide-bottom
       :columns="columns"
@@ -23,12 +23,23 @@
       </q-tr>
         <q-tr v-show="props.expand" :props="props">
           <q-td colspan="100%">
-            <div class="text-left">This is expand slot for row above: {{ props.row.name }}.</div>
+            <div v-for="(item, key) in props.row.itens" :key="key">
+              <div class="flex-jb flex-ac">
+                <div class="flex-c" to="\dd">
+                  <span>{{item.description}}</span>
+                  <span >{{item.value}}</span>
+                </div>
+                <q-btn size="sm" color="gray" round flat icon="chevron_right"/>
+              </div>
+              <hr>
+            </div>
           </q-td>
         </q-tr>
       </template>
     </q-table>
   </div>
+  {{ filters }}
+{{  wallet}}
 </template>
 
 <script>
@@ -38,30 +49,33 @@ const columns = [
   { name: 'amount', required: true, align: 'center', field: 'amount', sortable: true },
 ]
 
-const rows = [
-  {
-    percentage: 50,
-    name: 'Renda fixa',
-    amount: 5,
-  },
-  {
-    percentage: 20,
-    name: 'Ações',
-    amount: 456,
-  },
-  {
-    percentage: 30,
-    name: 'Moedas',
-    amount: 159,
-  },
-]
+// const rows = [
+//   {
+//     percentage: 50,
+//     name: 'Renda fixa',
+//     amount: 5,
+//   },
+//   {
+//     percentage: 20,
+//     name: 'Ações',
+//     amount: 456,
+//   },
+//   {
+//     percentage: 30,
+//     name: 'Moedas',
+//     amount: 159,
+//   },
+// ]
 
 export default {
   setup () {
     return {
       columns,
-      rows
+      // rows
     }
-  }
+  },
+  props:{
+    wallet:Array,
+  },
 }
 </script>

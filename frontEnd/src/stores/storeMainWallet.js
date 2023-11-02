@@ -4,7 +4,7 @@ import { keycloak } from "boot/keycloak.js";
 
 export const storeMainWallet = defineStore('storeMainWallet', {
   state: () => ({
-      wallet:{ff:"olá"},
+      wallet:[],
   }),
 
   getters: {
@@ -21,7 +21,7 @@ export const storeMainWallet = defineStore('storeMainWallet', {
         }
       })
       .then((res) => {
-        this.wallet = res;
+        this.wallet = res.data.data;
       })
       .catch((error) => {
         console.log("error", error.response.data.message);

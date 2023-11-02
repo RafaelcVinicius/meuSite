@@ -17,7 +17,11 @@ const routes = [
   {
     path: "/wallet",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/wallet/DashboardPage.vue") }],
+    children: [
+      { path: "", component: () => import("pages/wallet/DashboardPage.vue") },
+      { path: "create", component: () => import("pages/wallet/CreatePage.vue") }
+
+    ],
   },
 
   // Always leave this as last one,

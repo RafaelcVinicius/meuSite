@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Resources\WalletResource;
+use App\Http\Resources\wallet\WalletListResource;
+use App\Http\Resources\wallet\WalletResource;
 use App\Repositories\Contracts\WalletRepositoryInterface;
 use App\Repositories\WalletRepository;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class WalletService
 
     public function showAll()
     {
-        return WalletResource::collection($this->walletRepository->showAll());
+        return new WalletListResource($this->walletRepository->showAll());
     }
 
     public function update(Request $request)
